@@ -13,6 +13,8 @@ func main() {
 	controllers.InitCollection()
 	router := Routers.SetupRouter()
 
-	log.Fatal(http.ListenAndServe(":8000", router))
+	userCollection := modules.GetCollection("mongoDB-GO", "Users")
+	modules.CreateInitialAdmin(userCollection)
 
+	log.Fatal(http.ListenAndServe(":8000", router))
 }
